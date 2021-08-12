@@ -1,7 +1,8 @@
-view: categorybrand {
+view: categoryBrand {
   # # You can specify the table name if it's different from the view name:
    sql_table_name:gurufit_to_looker.es_catagoryBrand ;;
   #
+
   # # dimension 정의
   dimension: cate_cd {
     hidden: yes
@@ -16,4 +17,5 @@ view: categorybrand {
     type: string
     sql: ${TABLE}.cate_nm ;;
   }
+
 }

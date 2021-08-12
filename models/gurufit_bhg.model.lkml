@@ -6,15 +6,35 @@ connection: "gurufit_mariadb_skillchange"
 
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }
+
+  explore: orderGoods{
+    join: order {
+      relationship: many_to_one
+      sql_on: ${order.orderNo} = ${orderGoods.orderNo} ;;
+    }
+
+    join: member {
+      relationship: many_to_one
+      sql_on: ${member.memNo} = ${order.memNo} ;;
+    }
+
+    join: orderinfo {
+      relationship: many_to_one
+      sql_on: ${orderinfo.orderNo} = ${orderGoods.orderNo} ;;
+    }
+
+    join: goods {
+      relationship: many_to_one
+      sql_on: ${goods.goodsNo} = ${orderGoods.goodsNo} ;;
+    }
+
+    join: categoryBrand {
+      relationship: many_to_one
+      sql_on: ${categoryBrand.cate_cd} = ${goods.brand_cd} ;;
+    }
+
+    join: goodsLinkCategory {
+      relationship: many_to_many
+      sql_on: ${goodsLinkCategory.goodsNo} = ${orderGoods.goodsNo} ;;
+    }
+  }

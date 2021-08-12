@@ -2,6 +2,7 @@ view: goods {
   # # You can specify the table name if it's different from the view name:
    sql_table_name: gurufit_to_looker.es_goods ;;
   #
+
   # # dimension 정의
   dimension: goodsNo {
     hidden: yes
@@ -49,7 +50,6 @@ view: goods {
 
   dimension: brand_cd {
     hidden: yes
-    primary_key: yes
     label: "브랜드 코드"
     type: string
     sql: ${TABLE}.brand_cd ;;
