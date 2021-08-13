@@ -52,7 +52,7 @@ view: goods {
     hidden: yes
     label: "브랜드 코드"
     type: string
-    sql: ${TABLE}.brand_cd ;;
+    sql: ${TABLE}.brandcd ;;
   }
 
 }

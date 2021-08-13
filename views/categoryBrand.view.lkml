@@ -1,6 +1,6 @@
 view: categoryBrand {
   # # You can specify the table name if it's different from the view name:
-   sql_table_name:gurufit_to_looker.es_catagoryBrand ;;
+   sql_table_name:gurufit_to_looker.es_categoryBrand ;;
   #
 
   # # dimension 정의
@@ -9,13 +9,13 @@ view: categoryBrand {
     primary_key: yes
     label: "카테고리 코드"
     type: string
-    sql: ${TABLE}.cate_cd ;;
+    sql: ${TABLE}.catecd ;;
   }
 
   dimension: cate_nm {
     label: "카테고리 명"
     type: string
-    sql: ${TABLE}.cate_nm ;;
+    sql: ${TABLE}.catenm ;;
   }
 
 }

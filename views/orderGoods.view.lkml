@@ -216,4 +216,22 @@ view: orderGoods {
     sql: ${TABLE}.modDt ;;
   }
 
+  dimension: paymentDt {
+    label: "입금일자"
+    type: date
+    sql: ${TABLE}.paymentDt ;;
+  }
+
+  dimension: saleAmt {
+    label: "매출"
+    type: number
+    sql: ${goodsPrice} ;;
+  }
+
+  dimension: netSales {
+    label: "순매출"
+    type: number
+    sql: ${goodsPrice} - IFNULL(${couponGoodsDcPrice},0) - IFNULL(${enuri},0) - IFNULL(${goodsDcPrice},0) - IFNULL(${memberDcPrice},0) ;;
+    drill_fields: [couponGoodsDcPrice,enuri,goodsDcPrice,memberDcPrice]
+  }
 }

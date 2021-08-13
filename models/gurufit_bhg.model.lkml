@@ -37,4 +37,9 @@ connection: "gurufit_mariadb_skillchange"
       relationship: many_to_many
       sql_on: ${goodsLinkCategory.goodsNo} = ${orderGoods.goodsNo} ;;
     }
+
+    join: orderGoodsProfit {
+      relationship: one_to_one
+      sql_on: ${orderGoods.orderNo} = ${orderGoodsProfit.orderNo} ;;
+    }
   }

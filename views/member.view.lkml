@@ -295,4 +295,13 @@ view: member {
     sql: ${TABLE}.memberFl ;;
   }
 
+  dimension: age {
+    label: "나이"
+    type: number
+    sql: (TIMESTAMPDIFF(YEAR, ${birthDt},curdate() )) + 1 ;;
+
+  }
+
+
+
 }
