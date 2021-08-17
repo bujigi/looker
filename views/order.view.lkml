@@ -2,7 +2,7 @@ view: order {
   # # You can specify the table name if it's different from the view name:
    sql_table_name: gurufit_to_looker.es_order ;;
   #
-
+  label: "Order"
   # # dimension 정의
   dimension: orderNo {
     hidden: yes
@@ -37,6 +37,7 @@ view: order {
   }
 
   dimension: modDt {
+    hidden: yes
     label: "수정일"
     type: date
     sql: ${TABLE}.modDt ;;
@@ -97,9 +98,19 @@ view: order {
     sql: ${TABLE}.orderTypeFl ;;
   }
 
-  dimension: paymentDt {
+  dimension_group: paymentDt {
     label: "입금일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.paymentDt ;;
   }
 
@@ -110,6 +121,7 @@ view: order {
   }
 
   dimension: regDt {
+    hidden: yes
     label: "등록일"
     type: date
     sql: ${TABLE}.regDt ;;
@@ -140,5 +152,11 @@ view: order {
     type: string
     sql: ${TABLE}.userRequestMemo ;;
   }
+
+ # measure: order_count {
+ #   label : "주문개수"
+ #   type: count
+   # drill_fields: []
+ #}
 
 }

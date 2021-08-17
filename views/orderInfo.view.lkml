@@ -2,7 +2,7 @@ view: orderinfo {
   # # You can specify the table name if it's different from the view name:
    sql_table_name:gurufit_to_looker.es_orderInfo ;;
   #
-
+  label: "Order Info"
   # # dimension 정의
   dimension: sno {
     hidden: yes
@@ -158,6 +158,7 @@ view: orderinfo {
   }
 
   dimension: modDt {
+    hidden: yes
     label: "수정일"
     type: date
     sql: ${TABLE}.modDt ;;
@@ -170,6 +171,7 @@ view: orderinfo {
   }
 
   dimension: regDt {
+    hidden: yes
     label: "등록일"
     type: date
     sql: ${TABLE}.regDt ;;

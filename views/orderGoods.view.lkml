@@ -2,7 +2,7 @@ view: orderGoods {
   # # You can specify the table name if it's different from the view name:
    sql_table_name: gurufit_to_looker.es_orderGoods ;;
   #
-
+  label: "Order Goods"
   ## dimension 정의
   dimension: sno {
     hidden: yes
@@ -180,45 +180,97 @@ view: orderGoods {
     sql: ${TABLE}.handleSno ;;
   }
 
-  dimension: cancelDt {
+  dimension_group: cancelDt {
     label: "취소완료일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.cancelDt ;;
   }
 
-  dimension: deliveryCompleteDt {
+  dimension_group: deliveryCompleteDt {
     label: "배송완료일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.deliveryCompleteDt ;;
   }
 
-  dimension: deliveryDt {
+  dimension_group: deliveryDt {
     label: "배송일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.deliveryDt ;;
   }
 
-  dimension: finishDt {
+  dimension_group: finishDt {
     label: "구매확정일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.finishDt ;;
   }
 
   dimension: regDt {
+    hidden: yes
     label: "등록일"
     type: date
     sql: ${TABLE}.regDt ;;
   }
 
   dimension: modDt {
+    hidden: yes
     label: "수정일"
     type: date
     sql: ${TABLE}.modDt ;;
   }
 
-  dimension: paymentDt {
+  dimension_group: paymentDt {
     label: "입금일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.paymentDt ;;
   }
 
@@ -232,6 +284,25 @@ view: orderGoods {
     label: "순매출"
     type: number
     sql: ${goodsPrice} - IFNULL(${couponGoodsDcPrice},0) - IFNULL(${enuri},0) - IFNULL(${goodsDcPrice},0) - IFNULL(${memberDcPrice},0) ;;
-    drill_fields: [couponGoodsDcPrice,enuri,goodsDcPrice,memberDcPrice]
+  }
+
+  measure: sales_sum {
+    label: "매출합계"
+    type:  sum
+    sql: ${saleAmt} ;;
+    value_format :  "#,##0"
+  }
+
+  measure: netSales_sum {
+    label: "순매출합계"
+    type:  sum
+    sql: ${netSales} ;;
+    value_format :  "#,##0"
+  }
+
+  measure: orderGoods_count {
+    label : "상품주문개수"
+    type: count
+    # drill_fields: []
   }
 }

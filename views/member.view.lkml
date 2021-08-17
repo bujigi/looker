@@ -2,7 +2,7 @@ view: member {
   # # You can specify the table name if it's different from the view name:
    sql_table_name: gurufit_to_looker.es_member ;;
   #
-
+  label: "Member"
   # # dimension 정의
   dimension: memNo {
     hidden: yes
@@ -42,9 +42,19 @@ view: member {
     sql: ${TABLE}.birthDt ;;
   }
 
-  dimension: entryDt {
+  dimension_group: entryDt {
     label: "가입일"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.entryDt ;;
   }
 
@@ -54,13 +64,24 @@ view: member {
     sql: ${TABLE}.lastLoginDt ;;
   }
 
-  dimension: lastSaleDt {
+  dimension_group: lastSaleDt {
     label: "최종구매일"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.lastSaleDt ;;
   }
 
   dimension: regDt {
+    hidden: yes
     label: "등록일"
     type: date
     sql: ${TABLE}.regDt ;;
@@ -111,7 +132,7 @@ view: member {
   dimension: sexFl {
     label: "성별"
     type: string
-    sql: ${TABLE}.sexFl ;;
+    sql: CASE WHEN ${TABLE}.sexFl = 'w' THEN '여' ELSE '남' END ;;
   }
 
   dimension: entryPath {
@@ -228,32 +249,73 @@ view: member {
     sql: ${TABLE}.guidePasswordDt ;;
   }
 
-  dimension: approvalDt {
+  dimension_group: approvalDt {
     label: "가입 승인 일"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.approvalDt ;;
   }
 
-  dimension: birthEventFl {
+  dimension_group: birthEventFl {
     label: "생일 이벤트 처리일자"
     description: "sms,쿠폰 등 처리일자"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.birthEventFl ;;
   }
 
-  dimension: changePasswordDt {
+  dimension_group: changePasswordDt {
     label: "비밀번호변경일"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.changePasswordDt ;;
   }
 
-  dimension: entryBenefitOfferDt {
+  dimension_group: entryBenefitOfferDt {
     label: "가입혜택지급일"
-    type: date
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.entryBenefitOfferDt ;;
   }
 
   dimension: modDt {
+    hidden: yes
     label: "수정일"
     type: date
     sql: ${TABLE}.modDt ;;
@@ -299,9 +361,14 @@ view: member {
     label: "나이"
     type: number
     sql: (TIMESTAMPDIFF(YEAR, ${birthDt},curdate() )) + 1 ;;
-
   }
 
-
+  dimension: age_tier {
+    label: "연령대"
+    type: tier
+    tiers: [0, 10, 20, 30, 40, 50, 60, 70,80,90]
+    style: integer
+    sql: ${age} ;;
+  }
 
 }
