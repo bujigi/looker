@@ -25,24 +25,28 @@ view: goods {
   }
 
   dimension: hitCnt {
+    hidden: yes
     label: "조회 수"
     type: number
     sql: ${TABLE}.hitCnt ;;
   }
 
   dimension: cartCnt {
+    hidden: yes
     label: "장바구니 수"
     type: number
     sql: ${TABLE}.cartCnt ;;
   }
 
   dimension: wishCnt {
+    hidden: yes
     label: "관심상품 수"
     type: number
     sql: ${TABLE}.wishCnt ;;
   }
 
   dimension: reviewCnt {
+    hidden: yes
     label: "리뷰 수"
     type: number
     sql: ${TABLE}.reviewCnt ;;
@@ -54,6 +58,49 @@ view: goods {
     type: string
     sql: ${TABLE}.brandcd ;;
   }
+
+  dimension: brandcate_cd {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.brandcateCd ;;
+  }
+
+  dimension: lesmore_dc_rate {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.lesmoreDcRate ;;
+  }
+
+  dimension: purchase_no {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.purchaseNo ;;
+  }
+
+  measure: hitCntSum {
+    label: "조회 수"
+    type: sum
+    sql: ${hitCnt} ;;
+  }
+
+  measure: cartCntSum {
+    label: "장바구니 수"
+    type: sum
+    sql: ${cartCnt} ;;
+  }
+
+  measure: wishCntSum {
+    label: "관심상품 수"
+    type: sum
+    sql: ${wishCnt} ;;
+  }
+
+  measure: reviewCntSum {
+    label: "리뷰 수"
+    type: sum
+    sql: ${reviewCnt} ;;
+  }
+
 
   measure: goods_count {
     label : "상품개수"

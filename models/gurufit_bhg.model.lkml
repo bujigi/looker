@@ -38,8 +38,8 @@ connection: "gurufit_mariadb_skillchange"
       sql_on: ${goodsLinkCategory.goodsNo} = ${orderGoods.goodsNo} ;;
     }
 
-    join: orderGoodsProfit {
-      relationship: one_to_one
-      sql_on: ${orderGoods.orderNo} = ${orderGoodsProfit.orderNo} ;;
-    }
+    # join: orderGoodsProfit {
+    #   relationship: one_to_one
+    #   sql_on: ${orderGoods.orderNo} = ${orderGoodsProfit.orderNo} ;;
+    # }
   }

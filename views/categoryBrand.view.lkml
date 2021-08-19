@@ -18,4 +18,10 @@ view: categoryBrand {
     sql: ${TABLE}.catenm ;;
   }
 
+  measure: count {
+    label : "개수"
+    type :  count
+
+  }
+
 }

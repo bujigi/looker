@@ -13,30 +13,35 @@ view: member {
   }
 
   dimension: address {
+    hidden: yes
     label: "주소"
     type: string
     sql: ${TABLE}.address ;;
   }
 
   dimension: addressSub {
+    hidden: yes
     label: "상세주소"
     type: string
     sql: ${TABLE}.addressSub ;;
   }
 
   dimension: zipcode {
+    hidden: yes
     label: "우편번호"
     type: string
     sql: ${TABLE}.zipcode ;;
   }
 
   dimension: zonecode {
+    hidden: yes
     label: "우편번호(5자리)"
     type: string
     sql: ${TABLE}.zonecode ;;
   }
 
   dimension: birthDt {
+    hidden: yes
     label: "생년월일"
     type: date
     sql: ${TABLE}.birthDt ;;
@@ -59,6 +64,7 @@ view: member {
   }
 
   dimension: lastLoginDt {
+    hidden: yes
     label: "최종로그인"
     type: date
     sql: ${TABLE}.lastLoginDt ;;
@@ -88,12 +94,14 @@ view: member {
   }
 
   dimension: memPw {
+    hidden: yes
     label: "비밀번호"
     type: string
     sql: ${TABLE}.memPw ;;
   }
 
   dimension: nickNm {
+    hidden: yes
     label: "닉네임"
     type: string
     sql: ${TABLE}.nickNm ;;
@@ -112,18 +120,21 @@ view: member {
   }
 
   dimension: cellPhone {
+    hidden: yes
     label: "핸드폰"
     type: string
     sql: ${TABLE}.cellPhone ;;
   }
 
   dimension: email {
+    hidden: yes
     label: "이메일"
     type: string
     sql: ${TABLE}.email ;;
   }
 
   dimension: phone {
+    hidden: yes
     label: "전화번호"
     type: string
     sql: ${TABLE}.phone ;;
@@ -142,78 +153,91 @@ view: member {
   }
 
   dimension: groupSno {
-    label: "회원등급sno"
+    hidden: yes
+    label: "회원등급"
     type: string
     sql: ${TABLE}.groupSno ;;
   }
 
   dimension: rncheck {
+    hidden: yes
     label: "본인확인방법"
     type: string
     sql: ${TABLE}.rncheck ;;
   }
 
   dimension: recommFl {
+    hidden: yes
     label: "추천인등록여부"
     type: yesno
     sql: ${TABLE}.recommFl ;;
   }
 
   dimension: recommId {
+    hidden: yes
     label: "추천인id"
     type: string
     sql: ${TABLE}.recommId ;;
   }
 
   dimension: loginCnt {
+    hidden: yes
     label: "로그인횟수"
     type: number
     sql: ${TABLE}.loginCnt ;;
   }
 
   dimension: loginLimit {
+    hidden: yes
     label: "로그인제한"
     type: string
     sql: ${TABLE}.loginLimit ;;
   }
 
   dimension: lastLoginIp {
+    hidden: yes
     label: "최종로그인IP"
     type: string
     sql: ${TABLE}.lastLoginIp ;;
   }
 
   dimension: mileage {
+    hidden: yes
     label: "적립금"
     type: number
     sql: ${TABLE}.mileage ;;
   }
 
   dimension: saleAmt {
+    hidden: yes
     label: "총구매금액"
     type: number
     sql: ${TABLE}.saleAmt ;;
   }
 
   dimension: saleCnt {
+    hidden: yes
     label: "구매횟수"
     type: number
     sql: ${TABLE}.saleCnt ;;
   }
 
   dimension: deposit {
+    hidden: yes
     label: "예치금"
     type: number
     sql: ${TABLE}.deposit ;;
   }
 
   dimension: sleepFl {
+    hidden: yes
     label: "휴면회원여부"
     type: yesno
     sql: ${TABLE}.sleepFl ;;
   }
 
   dimension: adultConfirmDt {
+    hidden: yes
     label: "성인여부인증시간"
     type: date
     sql: ${TABLE}.adultConfirmDt ;;
@@ -222,35 +246,40 @@ view: member {
   dimension: adultFl {
     label: "성인여부"
     type: yesno
-    sql: ${TABLE}.adultFl ;;
+    sql: CASE WHEN ${TABLE}.adultFl ='yes' then '성인' ELSE '미성년' END ;;
   }
 
   dimension: appFl {
+    hidden: yes
     label: "승인여부"
     type: yesno
     sql: ${TABLE}.appFl ;;
   }
 
   dimension: groupModDt {
+    hidden: yes
     label: "등급수정일"
     type: date
     sql: ${TABLE}.groupModDt ;;
   }
 
   dimension: groupValidDt {
+    hidden: yes
     label: "등급유효일"
     type: date
     sql: ${TABLE}.groupValidDt ;;
   }
 
   dimension: guidePasswordDt {
+    hidden: yes
     label: "비밀번호변경안내일"
     type: date
     sql: ${TABLE}.guidePasswordDt ;;
   }
 
   dimension_group: approvalDt {
-    label: "가입 승인 일"
+    #hidden: yes
+    label: "가입일"
     type: time
     timeframes: [
       raw,
@@ -266,6 +295,7 @@ view: member {
   }
 
   dimension_group: birthEventFl {
+    hidden: yes
     label: "생일 이벤트 처리일자"
     description: "sms,쿠폰 등 처리일자"
     type: time
@@ -283,6 +313,7 @@ view: member {
   }
 
   dimension_group: changePasswordDt {
+    hidden: yes
     label: "비밀번호변경일"
     type: time
     timeframes: [
@@ -299,6 +330,7 @@ view: member {
   }
 
   dimension_group: entryBenefitOfferDt {
+    hidden: yes
     label: "가입혜택지급일"
     type: time
     timeframes: [
@@ -322,6 +354,7 @@ view: member {
   }
 
   dimension: dupeinfo {
+    hidden: yes
     label: "중복가입확인정보"
     type: string
     sql: ${TABLE}.dupeinfo ;;
@@ -330,22 +363,25 @@ view: member {
   dimension: marriFl {
     label: "결혼여부"
     type: yesno
-    sql: ${TABLE}.marriFl ;;
+    sql: CASE WHEN ${TABLE}.marriFl ='yes' then '기혼' ELSE '미혼' END ;;
   }
 
   dimension: expirationFl {
+    hidden: yes
     label: "개인정보유효기간"
     type: string
     sql: ${TABLE}.expirationFl ;;
   }
 
   dimension: interest {
+    hidden: yes
     label: "관심분야"
     type: string
     sql: ${TABLE}.interest ;;
   }
 
   dimension: item {
+    hidden: yes
     label: "종목"
     type: string
     sql: ${TABLE}.item ;;
@@ -369,6 +405,49 @@ view: member {
     tiers: [0, 10, 20, 30, 40, 50, 60, 70,80,90]
     style: integer
     sql: ${age} ;;
+  }
+
+  measure: count {
+    label : "회원 수"
+    type: count
+  }
+
+  measure: depositSum {
+    label: "예치금"
+    type: sum
+    sql: ${deposit} ;;
+  }
+
+  measure: saleAmtSum {
+    label: "구매금액"
+    type: sum
+    sql: ${saleAmt} ;;
+  }
+
+  measure: saleCntSum {
+    label: "구매회수"
+    type: sum
+    sql: ${saleCnt} ;;
+  }
+
+  measure: mileageSum {
+    label: "적립금"
+    type: sum
+    sql: ${mileage} ;;
+  }
+
+  measure: recommFlCnt {
+    #hidden: yes
+    label: "추천인등록 수"
+    type: sum
+    sql: CASE WHEN ${recommFl} = 'y' THEN 1 ELSE 0 END ;;
+  }
+
+  measure: sleepFlCnt {
+    #hidden: yes
+    label: "휴먼회원 수"
+    type: sum
+    sql: CASE WHEN ${sleepFl} = 'y' THEN 1 ELSE 0 END ;;
   }
 
 }
