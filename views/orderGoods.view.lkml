@@ -33,6 +33,7 @@ view: orderGoods {
   }
 
   dimension: goodsCnt {
+    hidden: yes
     label: "상품 수량"
     type: number
     sql: ${TABLE}.goodsCnt ;;
@@ -118,6 +119,7 @@ view: orderGoods {
   }
 
   dimension: goodsPrice {
+    hidden: yes
     label: "상품 가격"
     type: number
     sql: ${TABLE}.goodsPrice ;;
@@ -263,6 +265,7 @@ view: orderGoods {
   }
 
   dimension: deliveryDays {
+    hidden: yes
     type: number
     label : "배송소요일"
     sql: TIMESTAMPDIFF(DAY, ${deliveryDt},${deliveryCompleteDt} ) ;;
@@ -300,6 +303,7 @@ view: orderGoods {
   }
 
   dimension: saleAmt {
+    hidden: yes
     label: "매출"
     type: number
     sql: ${goodsPrice} ;;
@@ -320,6 +324,7 @@ view: orderGoods {
   }
 
   dimension: goodNetSales {
+    hidden: yes
     label: "순매출"
     type: number
     sql: CASE WHEN ${orderStatus} in ('p1','g1','d1','d2','s1','b3','b1','b2','b4','r2','r1','z1','z2','z3','z4','z5','e1','e2','e3','e4','e5') and ${orderType} ='일반'
@@ -335,6 +340,7 @@ view: orderGoods {
   # }
 
   dimension: pgCommistion {
+    hidden: yes
     label: "PG수수료"
     type:  number
     sql: ${goodsPriceInfo} * 0.028 ;;
@@ -342,6 +348,7 @@ view: orderGoods {
   }
 
   dimension: profitPrice {
+    hidden: yes
     label: "이익금"
     type:  number
     sql: ${goodNetSales} - IFNULL(${fee_price},0) - IFNULL(${pgCommistion},0) ;;
@@ -350,18 +357,21 @@ view: orderGoods {
 
 
   dimension: baseDcPrice {
+    hidden: yes
     label: "기본할인금액"
     type:  number
     sql: CASE WHEN ${timeSaleFl} = 'n' THEN ${fixedPrice} - ${goodsPrice} ELSE 0 END ;;
   }
 
   dimension: timeDcPrice {
+    hidden: yes
     label: "타임세일할인금액"
     type:  number
     sql: CASE WHEN ${timeSaleFl} = 'y' THEN ${fixedPrice} - ${goodsPrice} ELSE 0 END ;;
   }
 
   dimension: dcPrice {
+    hidden: yes
     label: "할인금액"
     type:  number
     sql: ${enuri} + ${timeDcPrice} + ${memberDcPrice} + ${divisionCouponOrderMileage} + ${divisionCouponOrderDcPrice} + ${couponGoodsDcPrice} + ${baseDcPrice};;
@@ -376,6 +386,7 @@ view: orderGoods {
   }
 
   dimension: fee_price {
+    hidden: yes
     label: "판매대금"
     type: number
     sql:
@@ -483,21 +494,21 @@ view: orderGoods {
 
 
   measure: sales_sum {
-    label: "매출합계"
+    label: "매출금액"
     type:  sum
     sql: ${saleAmt} ;;
     value_format :  "#,##0"
   }
 
   measure: netSales_sum {
-    label: "순매출합계"
+    label: "순매출금액"
     type:  sum
     sql: ${goodNetSales} ;;
     value_format :  "#,##0"
   }
 
   measure: orderGoods_count {
-    label : "상품주문개수"
+    label : "상품주문건수"
     type: count
     # drill_fields: []
   }
@@ -509,15 +520,15 @@ view: orderGoods {
     value_format: "##,##0"
   }
 
-  # measure: dcPriceSum {
-  #   label: "할인합계금액"
-  #   type:  sum
-  #   sql: ${dcPrice} ;;
-  #   value_format :  "#,##0"
-  # }
+  measure: goodsCntSum {
+    label: "상품수량"
+    type:  sum
+    sql: ${goodsCnt} ;;
+    value_format :  "#,##0"
+  }
 
-  measure: salePriceSum {
-    label: "판매금액합계"
+  measure: freePriceSum {
+    label: "판매금액"
     type:  sum
     sql: ${fee_price} ;;
     value_format :  "#,##0"
@@ -529,6 +540,39 @@ view: orderGoods {
   #   sql:  (${dcPriceSum} / IFNULL(${sales_sum},0)) * 100;;
   #   value_format: "#,##0.00%"
   # }
+
+  measure: pgCommistionSum {
+    label: "PG수수료"
+    type:  sum
+    sql: ${pgCommistion} ;;
+    value_format: "##,##0"
+  }
+
+  measure: profitPriceSum {
+    label: "이익금"
+    type:  sum
+    sql: ${profitPrice} ;;
+    value_format: "##,##0"
+  }
+
+
+  measure: baseDcPriceSum {
+    label: "기본할인금액"
+    type:  sum
+    sql: ${baseDcPrice};;
+  }
+
+  measure: timeDcPriceSum {
+    label: "타임세일할인금액"
+    type:  sum
+    sql: ${timeDcPrice} ;;
+  }
+
+  measure: dcPriceSum {
+    label: "할인금액"
+    type:  sum
+    sql: ${dcPrice};;
+  }
 
 
 }
