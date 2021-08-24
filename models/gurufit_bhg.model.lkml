@@ -13,12 +13,14 @@ connection: "gurufit_mariadb_skillchange"
   }
 
   explore: orderGoods{
+    label: "구루핏 회원 및 주문 현황"
     sql_always_where: ${finishDt_year} in (2018,2019,2020) AND ${member.entryDt_year} in (2018,2019,2020) ;;
 
     # always_filter: {
     #   filters: [orderGoods.finishDt_year: ">= 2018"]
     # }
     join: order {
+      view_label: "Order"
       type: left_outer
       relationship: many_to_one
       sql_on: ${order.orderNo} = ${orderGoods.orderNo} ;;
@@ -31,18 +33,21 @@ connection: "gurufit_mariadb_skillchange"
     }
 
     join: orderinfo {
+      view_label: "Order"
       type: left_outer
       relationship: many_to_one
       sql_on: ${orderinfo.orderNo} = ${orderGoods.orderNo} ;;
     }
 
     join: goods {
+      view_label: "Goods"
       type: left_outer
       relationship: many_to_one
       sql_on: ${goods.goodsNo} = ${orderGoods.goodsNo} ;;
     }
 
     join: categoryBrand {
+      view_label: "Goods"
       type: left_outer
       relationship: many_to_one
       sql_on: ${categoryBrand.cate_cd} = ${goods.brand_cd} ;;

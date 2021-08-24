@@ -146,7 +146,7 @@ view: member {
   dimension: entryPath {
     label: "가입경로"
     type: string
-    sql: ${TABLE}.entryPath ;;
+    sql: CASE WHEN ${TABLE}.entryPath = 'pc' THEN 'PC' ELSE 'MOBILE' END ;;
   }
 
   dimension: groupSno {
@@ -407,30 +407,35 @@ view: member {
   measure: count {
     label : "회원 수"
     type: count
+    value_format: "##,##0"
   }
 
   measure: depositSum {
     label: "예치금"
     type: sum
     sql: ${deposit} ;;
+    value_format: "##,##0"
   }
 
   measure: saleAmtSum {
     label: "구매금액"
     type: sum
     sql: ${saleAmt} ;;
+    value_format: "##,##0"
   }
 
   measure: saleCntSum {
     label: "구매회수"
     type: sum
     sql: ${saleCnt} ;;
+    value_format: "##,##0"
   }
 
   measure: mileageSum {
     label: "적립금"
     type: sum
     sql: ${mileage} ;;
+    value_format: "##,##0"
   }
 
   measure: recommFlCnt {
@@ -438,13 +443,20 @@ view: member {
     label: "추천인등록 수"
     type: sum
     sql: CASE WHEN ${recommFl} = 'y' THEN 1 ELSE 0 END ;;
+    value_format: "##,##0"
   }
 
-  measure: sleepFlCnt {
-    #hidden: yes
-    label: "휴먼회원 수"
-    type: sum
-    sql: CASE WHEN ${sleepFl} = 'y' THEN 1 ELSE 0 END ;;
+  measure: recommFiRate {
+    label: "추천인등록비율"
+    type: number
+    sql: ${recommFlCnt} / ${count} ;;
+    value_format: "##0.00%"
   }
+
+  measure: enterCountPer {
+    type: percent_of_total
+    sql: ${count} ;;
+  }
+
 
 }
