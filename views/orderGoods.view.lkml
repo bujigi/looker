@@ -3,6 +3,7 @@ view: orderGoods {
    sql_table_name: gurufit_to_looker.es_orderGoods ;;
   #
   label: "Order Goods"
+
   ## dimension 정의
   dimension: sno {
     hidden: yes
@@ -574,5 +575,79 @@ view: orderGoods {
     sql: ${dcPrice};;
   }
 
+  # parameter: field_to_select {
+  #   label: "검색조건"
+  #   type: unquoted
+  #   allowed_value: {
+  #     value: "finishDt_year"
+  #     label: "연도별"
+  #   }
+  #   allowed_value: {
+  #     value: "finishDt_month"
+  #     label: "월별"
+  #   }
+  # }
+
+  # dimension: goods_select_term {
+  #   label: "검색조건"
+  #   type: string
+  #   sql: ${TABLE}.{% parameter field_to_select %} ;;
+  #   label_from_parameter: field_to_select
+  # }
+
+
+  # measure: brand_count {
+  #   type: sum
+  #   sql: CASE
+  #     WHEN ${categoryBrand.cate_nm} = '{% parameter brand_to_count %}'
+  #     THEN 1
+  #     ELSE 0
+  #   END
+  # ;;
+  # }
+
+  # parameter: brand_to_count {
+  #   type: string
+
+  # }
+
+  ## 필터에 입력한 두개 년의 오더 수 비교
+  # filter: timeframe_a {
+  #   type: date_time
+  # }
+
+  # dimension: group_a_yesno {
+  #   hidden: yes
+  #   type: yesno
+  #   sql: {% condition timeframe_a %} ${finishDt_raw} {% endcondition %} ;;
+  # }
+
+  # measure: count_a {
+  #   type: count
+  #   filters: [group_a_yesno: "yes"]
+  # }
+
+  # filter: timeframe_b {
+  #   type: date
+  # }
+
+  # dimension: group_b_yesno {
+  #   hidden: yes
+  #   type: yesno
+  #   sql: {% condition timeframe_a %} ${finishDt_raw} {% endcondition %} ;;
+  # }
+
+  # measure: count_b {
+  #   type: count
+  #   filters: [group_b_yesno: "yes"]
+  # }
+
+  # dimension: is_in_time_a_or_b {
+  #   group_label: "Time Comparison Filters"
+  #   type: yesno
+  #   sql:
+  #     {% condition timeframe_a %} ${finishDt_raw} {% endcondition %} OR
+  #     {% condition timeframe_b %} ${finishDt_raw} {% endcondition %} ;;
+  # }
 
 }

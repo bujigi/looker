@@ -51,11 +51,8 @@ view: member {
     label: "가입일"
     type: time
     timeframes: [
-      raw,
       date,
-      week,
       month,
-      quarter,
       year
     ]
     convert_tz: no
@@ -278,8 +275,8 @@ view: member {
   }
 
   dimension_group: approvalDt {
-    #hidden: yes
-    label: "가입일"
+    hidden: yes
+    label: "가입승인일"
     type: time
     timeframes: [
       raw,

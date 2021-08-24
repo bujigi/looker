@@ -80,25 +80,25 @@ view: goods {
   measure: hitCntSum {
     label: "조회 수"
     type: sum
-    sql: ${hitCnt} ;;
+    sql: ${hitCnt}  ;;
   }
 
   measure: cartCntSum {
     label: "장바구니 수"
     type: sum
-    sql: ${cartCnt} ;;
+    sql: ${cartCnt}  ;;
   }
 
   measure: wishCntSum {
     label: "관심상품 수"
     type: sum
-    sql: ${wishCnt} ;;
+    sql: ${wishCnt}  ;;
   }
 
   measure: reviewCntSum {
     label: "리뷰 수"
     type: sum
-    sql: ${reviewCnt} ;;
+    sql: ${reviewCnt}  ;;
   }
 
 
@@ -106,6 +106,34 @@ view: goods {
     label : "상품개수"
     type: count
     # drill_fields: []
+  }
+
+  parameter: field_to_select {
+    label: "상품 관련 수"
+    type: unquoted
+    allowed_value: {
+      value: "hitCnt"
+      label: "조회 수"
+    }
+    allowed_value: {
+      value: "cartCnt"
+      label: "장바구니 수"
+    }
+    allowed_value: {
+      value: "wishCnt"
+      label: "관심상품 수"
+    }
+    allowed_value: {
+      value: "reviewCnt"
+      label: "리뷰 수"
+    }
+  }
+
+  dimension: goods_select_count {
+    label: "상품 관련 수"
+    type: number
+    sql: ${TABLE}.{% parameter field_to_select %} ;;
+    label_from_parameter: field_to_select
   }
 
 }
