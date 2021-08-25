@@ -334,11 +334,6 @@ view: orderGoods {
          END ;;
   }
 
-  # dimension: salePrice {
-  #   label: "판매대금"
-  #   type:  number
-  #   sql: ${goodsPrice} - IFNULL(${divisionCouponOrderDcPrice},0) - IFNULL(${couponGoodsDcPrice},0) ;;
-  # }
 
   dimension: pgCommistion {
     hidden: yes
@@ -535,13 +530,6 @@ view: orderGoods {
     value_format :  "#,##0"
   }
 
-  # measure: dcPriceRate {
-  #   label: "할인율"
-  #   type: number
-  #   sql:  (${dcPriceSum} / IFNULL(${sales_sum},0)) * 100;;
-  #   value_format: "#,##0.00%"
-  # }
-
   measure: pgCommistionSum {
     label: "PG수수료"
     type:  sum
@@ -573,6 +561,20 @@ view: orderGoods {
     label: "할인금액"
     type:  sum
     sql: ${dcPrice};;
+  }
+
+  measure: dcPriceRate {
+    label: "할인율"
+    type: number
+    sql:  (${dcPriceSum} / IFNULL(${freePriceSum},0));;
+    value_format: "#,##0.00%"
+  }
+
+  measure: profitRate {
+    label: "이익율"
+    type: number
+    sql:  (${profitPriceSum} / IFNULL(${freePriceSum},0));;
+    value_format: "#,##0.00%"
   }
 
   # parameter: field_to_select {
