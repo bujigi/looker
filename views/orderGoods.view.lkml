@@ -577,6 +577,20 @@ view: orderGoods {
     value_format: "#,##0.00%"
   }
 
+  #########################################################################
+  ## 필터 수 만큼의 순위까지만 나타내도록 (5 입력시 상위 5개 요런식)
+  parameter: max_rank {
+    label : "순위"
+    type: number
+  }
+
+  dimension: limit_rank {
+    label: "제한 수"
+    type: number
+    sql: {% parameter max_rank %} ;;
+  }
+  #########################################################################
+
   # parameter: field_to_select {
   #   label: "검색조건"
   #   type: unquoted
