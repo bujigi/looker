@@ -14,6 +14,7 @@ connection: "gurufit_mariadb_skillchange"
 
   explore: orderGoods{
     label: "구루핏 회원 및 주문 현황"
+    # 2018,2019,2020년도 자료만 존재하여 해당 년도만 조회
     sql_always_where: ${finishDt_year} in (2018,2019,2020) AND ${member.entryDt_year} in (2018,2019,2020) ;;
 
     # always_filter: {
@@ -59,30 +60,27 @@ connection: "gurufit_mariadb_skillchange"
       sql_on: ${goodsLinkCategory.goodsNo} = ${orderGoods.goodsNo} ;;
     }
 
+    ## 월별 판매현황 집계
     aggregate_table: monthly_orders {
       materialization: {
         datagroup_trigger: orders_datagroup
       }
       query: {
-        dimensions: [orderGoods.finishDt_month]
-        measures: [orderGoods.sales_sum, orderGoods.profitPriceSum]
+        dimensions: [orderGoods.finishDt_month,categoryBrand.cate_nm]
+        measures: [orderGoods.sales_sum, orderGoods.profitPriceSum,order.count]
         #filters: [orderGoods.finishDt_date: "4 year"]
       }
     }
-
+    ## 일별 판매현황 집계
     aggregate_table: dailly_orders {
       materialization: {
         datagroup_trigger: orders_datagroup
       }
       query: {
-        dimensions: [orderGoods.finishDt_date]
-        measures: [orderGoods.sales_sum, orderGoods.profitPriceSum]
+        dimensions: [orderGoods.finishDt_date,categoryBrand.cate_nm]
+        measures: [orderGoods.sales_sum, orderGoods.profitPriceSum,order.count]
         #filters: [orderGoods.finishDt_date: "4 year"]
       }
     }
 
-    # join: orderGoodsProfit {
-    #   relationship: one_to_one
-    #   sql_on: ${orderGoods.orderNo} = ${orderGoodsProfit.orderNo} ;;
-    # }
   }

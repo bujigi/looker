@@ -408,6 +408,7 @@ view: member {
     label : "회원 수"
     type: count
     value_format: "##,##0"
+    drill_fields: [member_data_set*]
   }
 
   measure: depositSum {
@@ -422,6 +423,7 @@ view: member {
     type: sum
     sql: ${saleAmt} ;;
     value_format: "##,##0"
+    drill_fields: [member_data_set*]
   }
 
   measure: saleCntSum {
@@ -429,6 +431,7 @@ view: member {
     type: sum
     sql: ${saleCnt} ;;
     value_format: "##,##0"
+    drill_fields: [member_data_set*]
   }
 
   measure: mileageSum {
@@ -444,6 +447,7 @@ view: member {
     type: sum
     sql: CASE WHEN ${recommFl} = 'y' THEN 1 ELSE 0 END ;;
     value_format: "##,##0"
+    drill_fields: [member_data_set*]
   }
 
   measure: recommFiRate {
@@ -453,10 +457,9 @@ view: member {
     value_format: "##0.00%"
   }
 
-  measure: enterCountPer {
-    type: percent_of_total
-    sql: ${count} ;;
+
+  ## set 설정 아이디, 이름, 나이, 성별,가입일, 최종구매일
+  set: member_data_set {
+    fields: [memId,memNm,age,sexFl,entryDt_date,lastSaleDt_date]
   }
-
-
 }

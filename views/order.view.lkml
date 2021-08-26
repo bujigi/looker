@@ -196,17 +196,17 @@ view: order {
     label : "상품갯수"
     type: sum
     sql:${orderGoodsCnt};;
-    drill_fields: [orderContDetail*]
+    drill_fields: [orderSet*]
  }
 
   measure: count {
     label : "건수"
     type: count
-    drill_fields: [orderContDetail*]
+    drill_fields: [orderSet*]
   }
-
- set: orderContDetail  {
+ ## set 설정 주문번호, 상품명, 상품수
+ set: orderSet {
    fields: [orderNo,orderGoodsNm,orderGoodsCnt]
  }
-
+ ################################################
 }
