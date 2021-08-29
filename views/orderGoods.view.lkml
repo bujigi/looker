@@ -528,6 +528,7 @@ view: orderGoods {
     type:  sum
     sql: ${fee_price} ;;
     value_format :  "#,##0"
+    drill_fields: [orderGoodsSet*]
   }
 
   measure: pgCommistionSum {
@@ -542,6 +543,7 @@ view: orderGoods {
     type:  sum
     sql: ${profitPrice} ;;
     value_format: "##,##0"
+    drill_fields: [orderGoodsSet*]
   }
 
 
@@ -575,6 +577,7 @@ view: orderGoods {
     type: number
     sql:  (${profitPriceSum} / IFNULL(${freePriceSum},0));;
     value_format: "#,##0.00%"
+    drill_fields: [orderGoodsSet*]
   }
 
   #########################################################################
@@ -590,6 +593,10 @@ view: orderGoods {
     sql: {% parameter max_rank %} ;;
   }
   #########################################################################
+  set: orderGoodsSet {
+    fields: [finishDt_date,goodsNm,fee_price,profitPrice]
+  }
+
 
   # parameter: field_to_select {
   #   label: "검색조건"

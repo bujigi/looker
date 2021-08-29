@@ -15,7 +15,7 @@ view: categoryBrand {
   dimension: cate_nm {
     label: "Cate Nm"
     type: string
-    sql: ${TABLE}.catenm ;;
+    sql: CASE WHEN ${TABLE}.catenm IS NULL THEN '기타' ELSE ${TABLE}.catenm END  ;;
     link: {
       label: "Google"
       url: "http://www.google.com/search?q={{ value }}"

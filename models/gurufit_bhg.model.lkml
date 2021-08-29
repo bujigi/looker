@@ -41,20 +41,21 @@ connection: "gurufit_mariadb_skillchange"
     }
 
     join: goods {
-      view_label: "Goods"
+      view_label: "Order"
       type: left_outer
       relationship: many_to_one
       sql_on: ${goods.goodsNo} = ${orderGoods.goodsNo} ;;
     }
 
     join: categoryBrand {
-      view_label: "Goods"
+      view_label: "Order"
       type: left_outer
       relationship: many_to_one
       sql_on: ${categoryBrand.cate_cd} = ${goods.brand_cd} ;;
     }
 
     join: goodsLinkCategory {
+      view_label: "Order"
       type: left_outer
       relationship: many_to_many
       sql_on: ${goodsLinkCategory.goodsNo} = ${orderGoods.goodsNo} ;;

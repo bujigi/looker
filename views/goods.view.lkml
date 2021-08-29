@@ -109,32 +109,32 @@ view: goods {
   }
 
   ## liquid parameter 적용 ####################################
-  parameter: field_to_select {
-    label: "상품 관련 수"
-    type: unquoted
-    allowed_value: {
-      value: "hitCntSum"
-      label: "조회 수"
-    }
-    allowed_value: {
-      value: "cartCntSum"
-      label: "장바구니 수"
-    }
-    allowed_value: {
-      value: "wishCntSum"
-      label: "관심상품 수"
-    }
-    allowed_value: {
-      value: "reviewCntSum"
-      label: "리뷰 수"
-    }
-  }
+  # parameter: field_to_select {
+  #   label: "상품 관련 수"
+  #   type: unquoted
+  #   allowed_value: {
+  #     value: "hitCnt"
+  #     label: "조회 수"
+  #   }
+  #   allowed_value: {
+  #     value: "cartCnt"
+  #     label: "장바구니 수"
+  #   }
+  #   allowed_value: {
+  #     value: "wishCnt"
+  #     label: "관심상품 수"
+  #   }
+  #   allowed_value: {
+  #     value: "reviewCnt"
+  #     label: "리뷰 수"
+  #   }
+  # }
 
-  dimension: goods_select_count {
-    label: "상품 관련 수"
-    type: number
-    sql: ${TABLE}.{% parameter field_to_select %} ;;
-    label_from_parameter: field_to_select
-  }
+  # dimension: goods_select_count {
+  #   label: "상품 관련 수"
+  #   type: number
+  #   sql: ${TABLE}.{% parameter field_to_select %} ;;
+  #   label_from_parameter: field_to_select
+  # }
  ##########################################################
 }
