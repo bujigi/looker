@@ -588,6 +588,7 @@ view: orderGoods {
   }
 
   dimension: limit_rank {
+    hidden: yes
     label: "제한 수"
     type: number
     sql: {% parameter max_rank %} ;;
