@@ -51,6 +51,7 @@ view: member {
     label: "가입일"
     type: time
     timeframes: [
+      raw,
       date,
       month,
       year
