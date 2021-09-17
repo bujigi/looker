@@ -57,7 +57,7 @@ view: member {
       year
     ]
     convert_tz: no
-    datatype: date
+    #datatype: date
     sql: ${TABLE}.entryDt ;;
   }
 
